@@ -1,0 +1,20 @@
+name: landowpbase
+recipe: wordpress
+config:
+  webroot: wordpress
+  php: '8.2'
+  database: mysql:8.0
+  xdebug: debug
+  via: nginx
+services:
+  appserver:
+    overrides:
+      environment:
+        LANDO_FILE_PERMISSION_FIX: true
+        LANDO_HOST_IP: host.docker.internal
+        XDEBUG_CONFIG: client_host=host.docker.internal
+  redis:
+    type: redis
+    portforward: true
+  phpmyadmin:
+    type: phpmyadmin
